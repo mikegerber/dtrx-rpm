@@ -6,13 +6,17 @@ Summary: Intelligent archive extractor
 Group: Applications/Archiving
 License: GPLv3+
 URL: http://brettcsmith.org/2007/dtrx/
-Source0: https://github.com/dtrx-py/dtrx/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: https://github.com/dtrx-py/dtrx/releases/download/%{version}/%{name}-%{version}.tar.gz
 
 BuildArch: noarch
+# pyproject-rpm-macros needs EPEL on Rocky 8
+BuildRequires: python3-devel
+BuildRequires: python3-setuptools
+BuildRequires: python3-wheel
+BuildRequires: pyproject-rpm-macros
 #The following packages are needed for check section
 #BuildRequires:  lzma,ncompress,cabextract,p7zip-plugins,unshield,dpkg
 BuildRequires:  lzma,ncompress,cabextract,p7zip-plugins,dpkg
-BuildRequires:  %{__python3}
 
 # The following packages are the backend tools for dtrx
 Requires: bzip2
@@ -45,11 +49,14 @@ owner can read and write all those files.
 %prep
 %setup -q
 
+%generate_buildrequires
+%pyproject_buildrequires
 
 %build
+%pyproject_wheel
 
 %install
-%{__python3} setup.py install --prefix=%{buildroot}/%{_prefix}
+%pyproject_install
 
 %check
 #%{__python3} tests/compare.py
@@ -57,14 +64,17 @@ owner can read and write all those files.
 %files
 %{_bindir}/dtrx
 %{python3_sitelib}/*
-%doc NEWS README
+%doc README.md
 %license COPYING
+
+
 
 
 %changelog
 * Mon Sep 28 2026 Mike Gerber <mike@mike-gerber.de> - 8.7.1-1+mike0
 - Update to 8.7.1
 - Use Python 3
+- Use pyproject RPM macros
 - Remove unshield dependency for now
 
 * Mon Jun 15 2020 Mike Gerber <mike@sprachgewalt.de> - 7.1-13+mike1
