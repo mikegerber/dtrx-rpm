@@ -54,8 +54,9 @@ jobs:
           - fedora-43-x86_64
           - fedora-44-x86_64
           - fedora-45-x86_64
-          - rocky+epel-8-x86_64
-          - rocky+epel-9-x86_64
+          # Doesn't build on Rocky 8+9
+          #- rocky+epel-8-x86_64
+          #- rocky+epel-9-x86_64
           - rocky+epel-10-x86_64
 
     steps:
