@@ -26,7 +26,7 @@ BuildRequires: ncompress
 BuildRequires: cabextract
 BuildRequires: p7zip-plugins
 BuildRequires: dpkg
-BuildRequires: unrar-free
+BuildRequires: unrar
 BuildRequires: arj
 BuildRequires: lzip
 
@@ -41,7 +41,7 @@ Requires: rpm
 Requires: tar
 Requires: xz
 Requires: unzip
-Recommends: unrar-free
+Recommends: unrar
 Recommends: lzma
 Recommends: p7zip-plugins
 Suggests: ncompress
