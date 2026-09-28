@@ -1,17 +1,18 @@
-Name: dtrx
-Version: 7.1
-Release: 13+mike1%{?dist}
+Name:    dtrx
+Version: 8.7.1
+Release: 1+mike0%{?dist}
 Summary: Intelligent archive extractor
 
 Group: Applications/Archiving
 License: GPLv3+
 URL: http://brettcsmith.org/2007/dtrx/
-Source0: http://brettcsmith.org/2007/dtrx/%{name}-%{version}.tar.gz
+Source0: https://github.com/dtrx-py/dtrx/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildArch: noarch
 #The following packages are needed for check section
-BuildRequires:  lzma,ncompress,cabextract,p7zip-plugins,unshield,dpkg
-BuildRequires:  %{__python2}
+#BuildRequires:  lzma,ncompress,cabextract,p7zip-plugins,unshield,dpkg
+BuildRequires:  lzma,ncompress,cabextract,p7zip-plugins,dpkg
+BuildRequires:  %{__python3}
 
 # The following packages are the backend tools for dtrx
 Requires: bzip2
@@ -48,19 +49,24 @@ owner can read and write all those files.
 %build
 
 %install
-%{__python2} setup.py install --prefix=%{buildroot}/%{_prefix}
+%{__python3} setup.py install --prefix=%{buildroot}/%{_prefix}
 
 %check
-#%{__python2} tests/compare.py
+#%{__python3} tests/compare.py
 
 %files
 %{_bindir}/dtrx
-%{python2_sitelib}/*
+%{python3_sitelib}/*
 %doc NEWS README
 %license COPYING
 
 
 %changelog
+* Mon Sep 28 2026 Mike Gerber <mike@mike-gerber.de> - 8.7.1-1+mike0
+- Update to 8.7.1
+- Use Python 3
+- Remove unshield dependency for now
+
 * Mon Jun 15 2020 Mike Gerber <mike@sprachgewalt.de> - 7.1-13+mike1
 - Do not run the tests (no more PyYAML for Python2 in Fedora 32)
 
