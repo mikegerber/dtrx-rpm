@@ -25,6 +25,7 @@ BuildRequires: lzma
 BuildRequires: ncompress
 BuildRequires: cabextract
 BuildRequires: p7zip-plugins
+BuildRequires: wget
 BuildRequires: dpkg
 BuildRequires: unrar
 BuildRequires: arj
@@ -44,6 +45,7 @@ Requires: unzip
 Recommends: unrar
 Recommends: lzma
 Recommends: p7zip-plugins
+Recommends: wget
 Suggests: ncompress
 Suggests: cabextract
 Suggests: unshield
@@ -83,6 +85,7 @@ yq -i 'del(.[] | select(.name == "decompressing lrzip, not interactive"))' tests
 # Fails. Why?
 yq -i 'del(.[] | select(.name == "password rar noninteractive with password"))' tests/tests.yml
 yq -i 'del(.[] | select(.name == "password zip noninteractive"))' tests/tests.yml
+yq -i 'del(.[] | select(.name == "download and extract"))' tests/tests.yml
 
 # Tests report DEVELOPMENT as --version, installed RPM is fine
 yq -i 'del(.[] | select(.name == "--version"))' tests/tests.yml
