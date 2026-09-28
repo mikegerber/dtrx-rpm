@@ -54,9 +54,9 @@ jobs:
           - fedora-43-x86_64
           - fedora-44-x86_64
           - fedora-45-x86_64
-          - rocky-8-x86_64
-          - rocky-9-x86_64
-          - rocky-10-x86_64
+          - rocky+epel-8-x86_64
+          - rocky+epel-9-x86_64
+          - rocky+epel-10-x86_64
 
     steps:
       - name: Install Mock
