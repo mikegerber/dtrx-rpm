@@ -73,7 +73,9 @@ owner can read and write all those files.
 sed -i 's/setuptools>=75/setuptools/' pyproject.toml
 
 # Fix project.license for Rocky 8-10's build system
+%if 0%{?rhel}
 sed -i 's/license = "GPL-3.0-or-later"/license = { text = "GPL-3.0-or-later" }/' pyproject.toml
+%endif
 
 # Remove unsupported tests
 yq -i 'del(.[] | select(.name == "brotli"))' tests/tests.yml
