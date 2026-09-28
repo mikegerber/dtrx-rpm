@@ -50,7 +50,7 @@ owner can read and write all those files.
 %autosetup
 
 # We don't have setuptools 75 on Rocky 8-10, so fingers crossed
-sed -i 's/setuptools>=75/setuptools>=68/' pyproject.toml
+sed -i 's/setuptools>=75/setuptools/' pyproject.toml
 
 # Fix project.license for Rocky 8-10's build system
 sed -i 's/license = "GPL-3.0-or-later"/license = { text = "GPL-3.0-or-later" }/' pyproject.toml
