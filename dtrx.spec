@@ -47,7 +47,13 @@ after the archive.  dtrx will also change the permissions to ensure that the
 owner can read and write all those files.
 
 %prep
-%setup -q
+%autosetup
+
+# We don't have setuptools 75 on Rocky 8-10, so fingers crossed
+sed -i 's/setuptools>=75/setuptools>=68/' pyproject.toml
+
+# Fix project.license for Rocky 8-10's build system
+sed -i 's/license = "GPL-3.0-or-later"/license = { text = "GPL-3.0-or-later" }/' pyproject.toml
 
 %generate_buildrequires
 %pyproject_buildrequires
@@ -76,6 +82,7 @@ owner can read and write all those files.
 - Use Python 3
 - Use pyproject RPM macros
 - Remove unshield dependency for now
+- Patch pyproject.toml to make it build on Rocky 8-10
 
 * Mon Jun 15 2020 Mike Gerber <mike@sprachgewalt.de> - 7.1-13+mike1
 - Do not run the tests (no more PyYAML for Python2 in Fedora 32)
